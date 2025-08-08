@@ -25,7 +25,7 @@ const BookList = () => {
     useEffect(() => getAll(), []);
     return (
         <>
-            <Container fluid>
+            <Container fluid="xxl" style={{backgroundColor: "grey"}}>
                 <FilterBar />
                 <Row>
                     {chargement && (
@@ -36,7 +36,7 @@ const BookList = () => {
                     )}
                     {error && (<p className='fw-bold'>{error}</p>)}
                     {biblio && !chargement && !error && biblio.map(book => (
-                            <Col md={3} key={book.id}>
+                            <Col md={3} key={book.id} className='my-2'>
                                 <BookCard thebook={book} id={book.id} />
                             </Col>
                         ))}

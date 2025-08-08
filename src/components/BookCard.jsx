@@ -8,17 +8,19 @@ const BookCard = (props) => {
     return imgSrc
   }
 
-  
+
   return (
     <>
-      <Card>
-        <Card.Img src={handleImgSrc()} />
-        <Card.Body>
+      <Card className="p-0" style={{ width: "100%", height: "100%", maxWidth:"275px", border: "none", margin: "0 auto"}}>
+        <Card.Img variant='top' style={{width:"100%", maxHeight:"200px", padding: "0"}} src={handleImgSrc()} />
+        <Card.Body className="px-2 pt-2" style={{paddingBottom: "auto"}}>
           <Card.Title>{props.thebook.titre}</Card.Title>
-          <p className='text-primary'>{props.thebook.auteur}</p>
-          <p className='text-secondary'>{props.thebook.genre}</p>
-          <p className='text-secondary fs-italic'>{props.thebook.date}</p>
-          <p>{props.thebook.resume}</p>
+          <Card.Text className='text-primary'>{props.thebook.auteur}</Card.Text>
+          <Card.Text className='text-secondary'>{props.thebook.genre}</Card.Text>
+          <Card.Text className='text-secondary fs-italic'>{props.thebook.date}</Card.Text>
+          <Card.Text>{props.thebook.resume}</Card.Text>
+        </Card.Body>
+        <Card.Body className='text-center justify-self-bottom p-1'>
           <Button variant='primary'>Modifier</Button>
           <Button variant='danger'>Supprimer</Button>
         </Card.Body>
