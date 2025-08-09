@@ -25,9 +25,9 @@ const BookList = () => {
     useEffect(() => getAll(), []);
     return (
         <>
-            <Container fluid="xxl" style={{backgroundColor: "grey"}}>
+            <Container fluid="xxl" style={{backgroundColor: "grey", padding: 0}}>
                 <FilterBar />
-                <Row>
+                <Row className='px-2'>
                     {chargement && (
                         <div className='spinner-container'>
                             <div className='spinner'></div>
