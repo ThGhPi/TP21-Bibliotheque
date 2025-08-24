@@ -56,7 +56,7 @@ const BookList = () => {
 
     return (
         <>
-            <Container fluid="xxl" style={{ backgroundColor: "grey", padding: 0 }}>
+            <Container className='bg-dark-subtle' fluid="xxl" style={{ padding: 0 }}>
                 <FilterBar filters={filters} handleFilters={setFilters} genresList={toBeFiltered.genres} yearsList={toBeFiltered.years} />
                 <Row className='px-2'>
                     {chargement && (

@@ -7,7 +7,9 @@ const BookCard = (props) => {
     if (!imgSrc.startsWith("http") && !imgSrc.startsWith("/images/couvertures/")) setImgSrc(imgSrc => "/images/couvertures/" + imgSrc);
     return imgSrc
   }
-
+  const goToEditBook = () => {
+    
+  }
 
   return (
     <>
@@ -22,7 +24,7 @@ const BookCard = (props) => {
           <Card.Text>{props.thebook.resume}</Card.Text>
         </Card.Body>
         <Card.Body className='text-center justify-self-bottom p-1'>
-          <Button variant='primary'>Modifier</Button>
+          <Button variant='primary' onClick={goToEditBook}>Modifier</Button>
           <Button variant='danger'>Supprimer</Button>
         </Card.Body>
       </Card>
