@@ -1,41 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Button, Col, Form } from 'react-bootstrap'
 
 const FilterBar = (props) => {
     const [filterButton, setFilterButton] = useState("Filtrer");
-    const [filters, setFilters] = useState({ authorOrTitle: "", genre: "", year: "" });
+    const filters = { authorOrTitle: "", genre: "", year: "" };
 
     const handleFilterButton = () => {
         if (filterButton === "Filtrer") setFilterButton("Masquer les filtres");
         else setFilterButton("Filtrer");
     }
     const handleAuthorTitleChange = (e) => {
-        setFilters({ ...filters, authorOrTitle: e.target.value });
-        props.transmitFilterToBookList(filters);
+        props.handleFilters({ ...props.filters, authorOrTitle: e.target.value });
     }
     const handleGenreChange = (e) => {
         if (e.target.value != "Tous les genres") {
-            setFilters({ ...filters, genre: e.target.value });
-        } else { setFilters({ ...filters, genre: "" }) }
-        props.transmitFilterToBookList(filters);
+            props.handleFilters({ ...props.filters, genre: e.target.value });
+        } else { props.handleFilters({ ...props.filters, genre: "" }) }
     }
     const handleYearChange = (e) => {
         if (e.target.value != "Tous les années") {
-            setFilters({ ...filters, year: e.target.value });
-        } else { setFilters({ ...filters, year: "" }) }
-        props.transmitFilterToBookList(filters);
+            props.handleFilters({ ...props.filters, year: e.target.value });
+        } else { props.handleFilters({ ...props.filters, year: "" }) }
     }
     const clearFilters = () => {
-        setFilters({ authorOrTitle: "", genre: "", year: "" });
-        props.transmitFilterToBookList(filters);
+        props.handleFilters({ authorOrTitle: "", genre: "", year: "" });
     }
-    useEffect(() => {
-        const timer  = setInterval(() => {}, 500);
-        return () => clearInterval(timer);
-    }, [filters])
+
     return (
         <>
-
             <Row className='pt-2 text-center'>
                 <Col md={2}>
                     <Button variant='success'>Ajouter un livre</Button>

@@ -11,6 +11,7 @@ const BookList = () => {
     const [toBeFiltered, setToBeFiltered] = useState({ authorsAndTitles: [], genres: [], years: [] })
     const [filters, setFilters] = useState({ authorOrTitle: "", genre: "", year: "" });
     const [filteredBookList, setFilteredBookList] = useState([]);
+    
 
     const getAll = () => {
         setChargement(true);
@@ -39,21 +40,24 @@ const BookList = () => {
             .finally(() => { setChargement(false); });
     }
 
-    useEffect(() => getAll(), []);
-    useEffect(() => {
-        if (!biblio) return;
-        setFilteredBookList(biblio.filter(book => (
+    const handleFilterChange = () => {
+        setFilteredBookList(biblio.filter(book => { return (
             (filters.authorOrTitle === "" || book.auteur.includes(filters.authorOrTitle)
                 || book.titre.includes(filters.authorOrTitle))
             && (filters.genre === "" || book.genre === filters.genre)
             && (filters.year === "" || book.date.split("-")[2] === filters.year)
-        )))
-    }, [filters, biblio])
+        )}))
+    }
+    useEffect(() => getAll(), []);
+    useEffect(() => {
+        if (!biblio) return undefined;
+        handleFilterChange();
+    }, [biblio, filters])
 
     return (
         <>
             <Container fluid="xxl" style={{ backgroundColor: "grey", padding: 0 }}>
-                <FilterBar transmitFilterToBookList={setFilters} genresList={toBeFiltered.genres} yearsList={toBeFiltered.years} />
+                <FilterBar filters={filters} handleFilters={setFilters} genresList={toBeFiltered.genres} yearsList={toBeFiltered.years} />
                 <Row className='px-2'>
                     {chargement && (
                         <div className='spinner-container'>
@@ -62,7 +66,7 @@ const BookList = () => {
                         </div>
                     )}
                     {error && (<p className='fw-bold'>{error}</p>)}
-                    {filteredBookList == [] && (<p className='fw-bold'>Aucun livre ne correspond à votre recherche</p>)}
+                    {biblio && !chargement && !error && filteredBookList.length == 0 && (<p className='fw-bold'>Aucun livre ne correspond à votre recherche</p>)}
                     {biblio && !chargement && !error && filteredBookList != [] && filteredBookList.map(book =>
                     (<Col md={3} key={book.id} className='my-2'>
                         <BookCard thebook={book} id={book.id} />
