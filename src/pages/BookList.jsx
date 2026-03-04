@@ -30,7 +30,7 @@ const BookList = () => {
                     if (!yearsList.includes(bookDate[0])) yearsList.push(bookDate[0]);
                     book.date = `${bookDate[2]}-${bookDate[1]}-${bookDate[0]}`
                 });
-                setToBeFiltered({ authorsAndTitles: authorsAndTitlesList, genres: genresList, years: yearsList.toSorted() })
+                setToBeFiltered({ authorsAndTitles: authorsAndTitlesList, genres: genresList, years: yearsList.toSorted() });
                 setBiblio([...response.data])
             })
             .catch(erreur => {

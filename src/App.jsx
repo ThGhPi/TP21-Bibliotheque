@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import BookList from './pages/BookList';
 import AddBook from './pages/AddBook';
+import EditBook from './pages/EditBook';
 import './App.css';
 
 function App() {
